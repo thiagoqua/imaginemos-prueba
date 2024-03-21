@@ -17,9 +17,13 @@ builder.Services.AddDbContext<ImaginemosDBContext>();
 //instancias de inyección de dependencias
 //servicios
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ISellService, SellService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<DTOMapperService>();
 //repositorios
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ISellRepository, SellRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 
 var app = builder.Build();

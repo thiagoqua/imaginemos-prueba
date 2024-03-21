@@ -18,10 +18,10 @@ namespace backend.Repositories {
         }
 
         public async Task<int> Delete(Product product) {
-            return await Task.Run(async () => {
+            return await Task.Run(() => {
                 _dbContext.Products.Remove(product);
 
-                return await _dbContext.SaveChangesAsync();
+                return _dbContext.SaveChanges();
             });
         }
 

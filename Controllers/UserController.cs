@@ -1,31 +1,25 @@
 ﻿using backend.Models.DTOs;
-using backend.Models.Requests;
-using backend.Models.Responses;
 using backend.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers {
-    [Route("api/ventas")]
+    [Route("api/usuarios")]
     [ApiController]
-    public class SellController : ControllerBase {
-        private readonly ISellService _service;
+    public class UserController : ControllerBase {
+        private readonly IUserService _service;
 
-        public SellController(ISellService service){
+        public UserController(IUserService service) {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(
-            string? search,
-            string? minDate,
-            string? maxDate
-        ) {
+        public async Task<IActionResult> Get([FromQuery] string? search) {
             try {
-                List<SellDTO> res = await _service.Get(search,minDate,maxDate);
+                List<UserDTO> res = await _service.Get(search);
 
                 return Ok(res);
-            } catch(Exception ex) {
+            } catch (Exception ex) {
                 return StatusCode(500, ex.Message);
             }
         }
@@ -33,7 +27,7 @@ namespace backend.Controllers {
         [HttpGet("{id:long}")]
         public async Task<IActionResult> GetById([FromRoute] long id) {
             try {
-                SellDTO? res = await _service.GetById(id);
+                UserDTO? res = await _service.GetById(id);
 
                 return res == null
                     ? BadRequest()
@@ -43,26 +37,14 @@ namespace backend.Controllers {
             }
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create(CreateSellRequest req) {
-            try {
-                CreateSellResponse res = await _service.Create(req);
-
-                return Ok(res);
-            } catch(ArgumentException ex) {
-                return BadRequest($"The field '{ex.Message}' is invalid.");
-            } catch(Exception ex) {
-                return StatusCode(500, ex.Message);
-            }
-        }
-
         [HttpPut("{id:long}")]
         public async Task<IActionResult> Update(
-            [FromRoute] long id,
-            [FromBody] SellDTO dto
+            [FromBody] UserDTO dto,
+            [FromRoute] long id
         ) {
             try {
-                await _service.Update(id, dto);
+                await _service.Update(id,dto);
+
                 return Ok();
             } catch(ArgumentException) {
                 return BadRequest();
@@ -75,6 +57,7 @@ namespace backend.Controllers {
         public async Task<IActionResult> Delete([FromRoute] long id) {
             try {
                 await _service.Delete(id);
+
                 return Ok();
             } catch(ArgumentException) {
                 return BadRequest();

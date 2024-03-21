@@ -11,5 +11,23 @@ namespace backend.Services {
                 Price = obj.Price
             };
         }
+
+        public SellDTO mapSell(Sell obj) {
+            return new SellDTO {
+                Id = obj.Id,
+                Date = obj.date,
+                Total = obj.Total,
+                UserId = obj.UserId,
+                UserName = obj.User.Name
+            };
+        }
+
+        public UserDTO mapUser(User obj) {
+            return new UserDTO {
+                Id = obj.Id,
+                DNI = obj.DNI,
+                Name = obj.Name
+            };
+        }
     }
 }

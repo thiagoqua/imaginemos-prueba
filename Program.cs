@@ -1,4 +1,8 @@
 using backend.Models;
+using backend.Repositories;
+using backend.Repositories.Interfaces;
+using backend.Services;
+using backend.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ImaginemosDBContext>();
+
+//instancias de inyección de dependencias
+//servicios
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddSingleton<DTOMapperService>();
+//repositorios
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 
 var app = builder.Build();
 

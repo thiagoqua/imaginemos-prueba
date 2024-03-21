@@ -12,10 +12,10 @@ namespace backend.Models {
             options.UseNpgsql(Configuration.GetConnectionString("database"));
         }
 
-        DbSet<Product> Products { get; set; }
-        DbSet<Sell> Sells { get; set; }
-        DbSet<SellDetail> SellDetails {  get; set; }
-        DbSet<User> Users { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Sell> Sells { get; set; }
+        public DbSet<SellDetail> SellDetails { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);

@@ -150,6 +150,10 @@ ALTER TABLE public."__EFMigrationsHistory" OWNER TO test;
 --
 
 COPY public."Products" ("Id", "Name", "Price", "Description") FROM stdin;
+2       logitech mouse  40000.35        logitech g305 mouse
+3       logitech mouse  40000.35        logitech g305 mouse
+5       logitech mouse  40000.35        logitech g305 mouse
+7       auriculares reddragon   20      auris
 \.
 
 
@@ -158,6 +162,10 @@ COPY public."Products" ("Id", "Name", "Price", "Description") FROM stdin;
 --
 
 COPY public."SellDetails" ("Id", "ProductId", "SellId", "Quantity", "UnitaryPrice", "Total") FROM stdin;
+10      2       4       0       40000.35        0
+18      2       9       3       40000.35        120001.04999999999
+19      3       9       1       40000.35        40000.35
+20      7       9       1       20      60
 \.
 
 
@@ -166,6 +174,8 @@ COPY public."SellDetails" ("Id", "ProductId", "SellId", "Quantity", "UnitaryPric
 --
 
 COPY public."Sells" ("Id", "UserId", date, "Total") FROM stdin;
+4       5       2024-03-10 15:26:59.029+00      0
+9       10      2024-03-19 22:36:42.873+00      0
 \.
 
 
@@ -174,6 +184,8 @@ COPY public."Sells" ("Id", "UserId", date, "Total") FROM stdin;
 --
 
 COPY public."Users" ("Id", "Name", "DNI") FROM stdin;
+5       ricky   22902022
+10      messi   101010
 \.
 
 
@@ -182,8 +194,7 @@ COPY public."Users" ("Id", "Name", "DNI") FROM stdin;
 --
 
 COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin;
-20240320212546_init     8.0.3
-20240320214012_init     8.0.3
+20240320220707_init     8.0.3
 \.
 
 
@@ -191,28 +202,28 @@ COPY public."__EFMigrationsHistory" ("MigrationId", "ProductVersion") FROM stdin
 -- Name: Products_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: test
 --
 
-SELECT pg_catalog.setval('public."Products_Id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Products_Id_seq"', 7, true);
 
 
 --
 -- Name: SellDetails_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: test
 --
 
-SELECT pg_catalog.setval('public."SellDetails_Id_seq"', 1, false);
+SELECT pg_catalog.setval('public."SellDetails_Id_seq"', 20, true);
 
 
 --
 -- Name: Sells_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: test
 --
 
-SELECT pg_catalog.setval('public."Sells_Id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Sells_Id_seq"', 9, true);
 
 
 --
 -- Name: Users_Id_seq; Type: SEQUENCE SET; Schema: public; Owner: test
 --
 
-SELECT pg_catalog.setval('public."Users_Id_seq"', 1, false);
+SELECT pg_catalog.setval('public."Users_Id_seq"', 10, true);
 
 
 --

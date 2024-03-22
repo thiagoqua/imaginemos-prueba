@@ -117,18 +117,32 @@ namespace backend.Services {
         }
 
         public async Task Update(long id, SellDTO dto) {
-            Sell toDelete = await _repo.GetById(id)
+            Sell toUpdate = await _repo.GetById(id)
                                 ?? throw new ArgumentException();
             int status;
 
-            toDelete.date = dto.Date;
-            toDelete.User.Name = dto.UserName;
-            toDelete.Total = dto.Total;
+            toUpdate.date = dto.Date;
+            toUpdate.User.Name = dto.UserName;
+            toUpdate.Total = dto.Total;
 
-            status = await _repo.Update(toDelete);
+            status = await _repo.Update(toUpdate);
 
             if(status < 1)
                 throw new Exception("Sell not updated");
+        }
+
+        public async Task UpdateTotalPrice(long id, double price) {
+            int status;
+            Sell toUpdate = await _repo.GetById(id)
+                ?? throw new ArgumentException();
+
+            //puede ser positivo o negativo el precio
+            toUpdate.Total += price;
+
+            status = await _repo.Update(toUpdate);
+
+            if(status < 1)
+                throw new Exception("Sell price not updated");
         }
 
         private async Task<double> CalcTotal(Dictionary<long,int> products) {

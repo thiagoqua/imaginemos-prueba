@@ -13,5 +13,6 @@ namespace backend.Services.Interfaces {
         public Task<CreateSellResponse> Create(CreateSellRequest req);
         public Task Update(long id, SellDTO dto);
         public Task Delete(long id);
+        public Task UpdateTotalPrice(long id,double price);
     }
 }
